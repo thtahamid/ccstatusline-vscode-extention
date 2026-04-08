@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/core",
+    "packages/extension"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "build:core": "npm run build -w packages/core",
+    "build:extension": "npm run build -w packages/extension"
+  }
+}

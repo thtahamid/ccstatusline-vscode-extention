@@ -1,0 +1,91 @@
+{
+  "name": "ccstatusline-vscode",
+  "displayName": "Claude Code Status",
+  "description": "Show Claude Code session stats in VS Code — powerline, tokens, cost, context",
+  "version": "0.1.0",
+  "publisher": "ccstatusline",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ccstatusline/ccstatusline-vscode"
+  },
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["claude", "claude-code", "ai", "status-bar", "anthropic", "powerline"],
+  "icon": "images/icon.png",
+  "main": "./out/extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "ccstatusline",
+          "title": "Claude Code Status",
+          "icon": "$(pulse)"
+        }
+      ]
+    },
+    "views": {
+      "ccstatusline": [
+        {
+          "type": "webview",
+          "id": "ccstatusline.statusPanel",
+          "name": "Status"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ccstatusline.refresh",
+        "title": "Claude Code: Refresh Status Panel"
+      },
+      {
+        "command": "ccstatusline.showPanel",
+        "title": "Claude Code: Show Status Panel"
+      }
+    ],
+    "configuration": {
+      "title": "Claude Code Status",
+      "properties": {
+        "ccstatusline.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the Claude Code Status panel"
+        },
+        "ccstatusline.pollIntervalMs": {
+          "type": "number",
+          "default": 2000,
+          "minimum": 500,
+          "description": "How often to refresh session data (milliseconds)"
+        },
+        "ccstatusline.panelFontFamily": {
+          "type": "string",
+          "default": "",
+          "description": "Font family for the status panel (default: terminal font). Use a Powerline-patched font for glyphs."
+        },
+        "ccstatusline.panelFontSize": {
+          "type": "number",
+          "default": 13,
+          "description": "Font size for the status panel"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.94.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "esbuild": "^0.25.0",
+    "@vscode/vsce": "^3.0.0",
+    "@xterm/xterm": "^5.5.0",
+    "@xterm/addon-fit": "^0.10.0"
+  }
+}
